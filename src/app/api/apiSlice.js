@@ -18,7 +18,9 @@ const baseQuery = fetchBaseQuery({
     }
     return headers;
   },
+  credentials: 'include', 
 });
+
 
 const baseQueryWithReAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
