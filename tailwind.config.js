@@ -12,7 +12,7 @@ module.exports = {
         '40' : '40px'
       },
       backgroundColor:{
-        'authButton' : '#6BA8CC'
+        'Grey-Blue' : '#6BA8CC'
       }
     },
   },
