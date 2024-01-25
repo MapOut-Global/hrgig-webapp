@@ -6,6 +6,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
     headers.set('api-key', API_KEY);
@@ -18,7 +19,6 @@ const baseQuery = fetchBaseQuery({
     }
     return headers;
   },
-  credentials: 'include', 
 });
 
 
