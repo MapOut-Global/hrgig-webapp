@@ -29,14 +29,14 @@ export const SignIn = (props) => {
                         <div className='flex items-center justify-between gap-7 mt-16' >
                             <h3 className='text-2xl font-medium '>Or Choose</h3>
                             <div className=' flex items-center justify-center'>
-                                <div className='flex items-center justify-center border-black border-0.2 px-1 py-4 w-64  rounded-2xl text-xl'><p>Sign in with Google</p><img className='h-7 ml-2' src={GoogleIcon} /></div>
+                                <div className='flex items-center justify-center border-black border-0.2 px-1 py-4 w-64  rounded-2xl text-xl'><p>Sign in with Google</p><img className='h-7 ml-2' src={GoogleIcon} alt='' /></div>
                             </div>
                             <div className='flex items-center justify-center'>
-                                <div className=' flex items-center justify-center border-black border-0.2 px-1 py-4 w-64 rounded-2xl text-xl'><p>Sign in with LinkedIn</p><img className='h-7 ml-2' src={LinkedinIcon} /></div>
+                                <div className=' flex items-center justify-center border-black border-0.2 px-1 py-4 w-64 rounded-2xl text-xl'><p>Sign in with LinkedIn</p><img className='h-7 ml-2' src={LinkedinIcon} alt='' /></div>
                             </div>
                         </div>
 
-                        <div className='flex items-center justify-start'> <div className='flex items-center justify-center bg-Grey-Blue text-white py-4 px-20 rounded-40 mt-10 '>Sign In</div> </div>
+                        <div className='flex items-center justify-start'> <div className='flex items-center justify-center bg-Grey-Blue text-white py-4 px-20 rounded-40 mt-10 cursor-pointer '>Sign In</div> </div>
 
                     </div>
                 </div>

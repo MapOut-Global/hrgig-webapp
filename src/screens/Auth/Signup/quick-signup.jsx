@@ -27,7 +27,7 @@ export const QuickSignup = (props) => {
             <div className=' flex items-center justify-center border-black border-0.2 px-1 py-4 w-72 rounded-2xl text-xl' ><p>Sign up with LinkedIn</p><img className='h-7 ml-2' src={LinkedinIcon} alt='' /></div>
           </div>
           <h3 className='text-2xl font-medium mb-2'>or</h3>
-          <h3 className='text-2xl font-medium'>Create account with <span onClick={signUpMethodHandler} className='underline-offset-from-font underline'>email</span></h3>
+          <h3 className='text-2xl font-medium'>Create account with <span onClick={signUpMethodHandler} className='underline-offset-from-font underline cursor-pointer'>email</span></h3>
           <br />
           <br />
           <div className='flex items-center justify-center text-lg font-medium mb-4 mt-10'>
