@@ -4,7 +4,17 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      borderWidth:{
+        '0.2' : '0.2px' 
+      },
+      borderRadius:{
+        '40' : '40px'
+      },
+      backgroundColor:{
+        'Grey-Blue' : '#6BA8CC'
+      }
+    },
   },
   plugins: [],
 }
