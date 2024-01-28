@@ -22,7 +22,7 @@ const Home = () => {
         <span> Home
         </span>
         <span>
-          <Link to="/signUp">Sign In</Link>
+          <Link to="/signin">Sign In</Link>
         </span>
       </div>
     </div>
