@@ -16,7 +16,7 @@ export const LinkedinCallback = (props) => {
     const linkedinSignInHandler = async ({ code }) => {
 
         const { data } = await linkedinSignIn({
-            uri:`${window.location.protocol}//${window.location.host}`,
+            uri:`${window.location.origin}`,
             code: code,
             requestFrom: "hrgig",
         });
