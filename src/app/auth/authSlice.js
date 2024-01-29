@@ -21,7 +21,6 @@ export const authSlice = createSlice({
     builder.addMatcher(
       authApiSlice.endpoints.signUp.matchFulfilled,
       (state, action) => {
-        console.log("ACTION",action.payload?.data)
         const token = action.payload?.data?.token;
         const email = action.payload?.data?.user?.email;
         state.token = token;
@@ -41,8 +40,19 @@ export const authSlice = createSlice({
     builder.addMatcher(
       authApiSlice.endpoints.signIn.matchFulfilled,
       (state, action) => {
-        state.token = action.payload?.data?.token;
-        state.email = action.payload?.data?.user?.email;
+        const token = action.payload?.data?.token;
+        const email = action.payload?.data?.user?.email;
+        state.token = token;
+        state.email = email;
+
+        if (token) {
+          Cookies.set("token", token, {
+            expires: 1,
+            secure: true, 
+            httpOnly: true, 
+            sameSite: "strict",
+          });
+        }
         return state;
       }
     );

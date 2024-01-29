@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Signup from "./screens/Auth/Signup";
@@ -23,6 +25,7 @@ export default function App() {
           <Route path="/linkedin" element={<LinkedinCallback/>}/>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </Provider>
     </GoogleOAuthProvider>
