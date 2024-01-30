@@ -125,7 +125,7 @@ export const SignupComponent = ({ isSignUp }) => {
   return (
     <React.Fragment>
       <div className=" flex h-screen w-full items-center justify-center  ">
-        <div>
+        <div className={`${isSignUp && 'mt-24'}`}>
           <div className="flex items-center justify-between ">
             <h1 className="text-4xl font-extrabold ">
               {isSignUp ? "Sign Up" : "Sign In"}
