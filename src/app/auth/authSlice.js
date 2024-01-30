@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authApiSlice } from "./authApiSlice";
-import Cookies from "js-cookie";
 
 const initialState = {
   token: null,
   email: null,
+};
+
+const setAuthState = ({ state, action }) => {
+  const { token, user } = action.payload?.data || {};
+  state.token = token;
+  state.email = user?.email;
+  return state;
 };
 
 export const authSlice = createSlice({
@@ -16,60 +22,30 @@ export const authSlice = createSlice({
       state.email = null;
     },
   },
-  
+
   extraReducers: (builder) => {
     builder.addMatcher(
       authApiSlice.endpoints.signUp.matchFulfilled,
       (state, action) => {
-        const token = action.payload?.data?.token;
-        const email = action.payload?.data?.user?.email;
-        state.token = token;
-        state.email = email;
-
-        if (token) {
-          Cookies.set("token", token, {
-            expires: 1,
-            secure: true, 
-            httpOnly: true, 
-            sameSite: "strict",
-          });
-        }
-        return state;
+        return setAuthState({ state, action });
       }
     );
     builder.addMatcher(
       authApiSlice.endpoints.signIn.matchFulfilled,
       (state, action) => {
-        const token = action.payload?.data?.token;
-        const email = action.payload?.data?.user?.email;
-        state.token = token;
-        state.email = email;
-
-        if (token) {
-          Cookies.set("token", token, {
-            expires: 1,
-            secure: true, 
-            httpOnly: true, 
-            sameSite: "strict",
-          });
-        }
-        return state;
+        return setAuthState({ state, action });
       }
     );
     builder.addMatcher(
       authApiSlice.endpoints.googleSignIn.matchFulfilled,
       (state, action) => {
-        state.token = action.payload?.data?.token;
-        state.email = action.payload?.data?.user?.email;
-        return state;
+        return setAuthState({ state, action });
       }
     );
     builder.addMatcher(
       authApiSlice.endpoints.linkedinSignIn.matchFulfilled,
       (state, action) => {
-        state.token = action.payload?.data?.token;
-        state.email = action.payload?.data?.user?.email;
-        return state;
+        return setAuthState({ state, action });
       }
     );
   },
