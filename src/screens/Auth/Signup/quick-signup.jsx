@@ -40,41 +40,60 @@ export const QuickSignup = (props) => {
         <div className="text-center">
           <h1 className="text-4xl font-extrabold p-5 mt-28">Sign Up</h1>
           <div className="mt-3 mb-10 flex items-center justify-center">
-            <div
-              className=" flex items-center justify-center border-black border-0.2 px-1 py-4 w-72  rounded-2xl text-xl cursor-pointer"
-              onClick={() => handleGoogleLogin()}
+            <button
+              className=" flex items-center justify-center border-black border-0.2 px-1 py-4 w-72  rounded-2xl text-xl"
+              onClick={!isLoading ? handleGoogleLogin : null}
             >
               <p>
-                {isLoading ? "Show here a react loader" : "Sign up with Google"}
+                {isLoading ? (
+                  <div className="flex items-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white border-solid"></div>
+                    <span className="ml-2">Loading...</span>
+                  </div>
+                ) : (
+                  "Sign up with Google"
+                )}
               </p>
+
               <img className="h-7 ml-2" src={GoogleIcon} alt="" />
-            </div>
+            </button>
           </div>
-          <div className="my-7 flex items-center justify-center">
-            <a href={linkedinOAuthUrl}>
-              <div className=" flex items-center justify-center border-black border-0.2 px-1 py-4 w-72 rounded-2xl text-xl cursor-pointer">
-                <p>Sign up with LinkedIn</p>
-                <img className="h-7 ml-2" src={LinkedinIcon} alt="" />
-              </div>
-            </a>
+
+          <div className="mt-3 mb-10 flex items-center justify-center">
+            <button
+              className="flex items-center justify-center"
+              disabled={isLoading}
+            >
+              <a href={linkedinOAuthUrl}>
+                <div className=" flex items-center justify-center border-black border-0.2 px-1 py-4 w-72 rounded-2xl text-xl cursor-pointer">
+                  <p>Sign up with LinkedIn</p>
+                  <img className="h-7 ml-2" src={LinkedinIcon} alt="" />
+                </div>
+              </a>
+            </button>
           </div>
+
           <h3 className="text-2xl font-medium mb-2">or</h3>
           <h3 className="text-2xl font-medium">
             Create account with{" "}
-            <span
+            <button
               onClick={signUpMethodHandler}
               className="underline cursor-pointer"
+              disabled={isLoading}
             >
               email
-            </span>
+            </button>
           </h3>
           <br />
           <br />
           <div className="flex items-center justify-center text-lg font-medium mb-4 mt-10">
             <p>Already have an account with us? &nbsp; </p>
-            <Link className="underline" to="/signin">
-              Sign in
-            </Link>
+            <button disabled={isLoading}>
+              {" "}
+              <Link className="underline" to="/signin">
+                Sign in
+              </Link>
+            </button>
           </div>
           <p className="text-xs tracking-tight font-thin ">
             By Signing Up, you agree with our{" "}
