@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUserEmail } from '../../../app/auth/authSlice';
 import { SignupComponent } from '../Common/SignupComponent';
 
-const SignUp = (props) => {
+const SignUp = () => {
   const [isEmail, setIsEmail] = useState(false);
 
   const navigate = useNavigate();

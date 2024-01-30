@@ -20,14 +20,12 @@ export const SignupComponent = ({ isSignUp }) => {
   const [passwordError, setPasswordError] = useState("");
 
   const linkedinOAuthUrl = LinkedinOAuthUrl;
-
   const [
     signUp,
     {
       isSuccess: isSignUpSuccess,
       isLoading: isSignUpLodaing,
       isError: isSignUpError,
-      data: signUpData,
       error: signUpError,
     },
   ] = useSignUpMutation();
@@ -37,7 +35,6 @@ export const SignupComponent = ({ isSignUp }) => {
       isSuccess: isSignInSuccess,
       isLoading: isSignInLodaing,
       isError: isSignInError,
-      data: signInData,
       error: signInError,
     },
   ] = useSignInMutation();
@@ -47,7 +44,8 @@ export const SignupComponent = ({ isSignUp }) => {
   ] = useGoogleSignInMutation();
 
   useEffect(() => {
-    if (isSignUpSuccess || isSignInSuccess) {
+    console.log('ERRORRORO',signInError)
+    if (isSignUpSuccess || isSignInSuccess) { 
       setName("");
       setEmail("");
       setPassword("");
@@ -71,6 +69,7 @@ export const SignupComponent = ({ isSignUp }) => {
   }, [isGoogleError]);
 
   const handleSubmit = async () => {
+    console.log("Submit")
     isSignUp && setNameError("");
     setEmailError("");
     setPasswordError("");
