@@ -187,9 +187,9 @@ export const SignupComponent = ({ isSignUp }) => {
           )}
 
           <div className="flex items-center justify-end">
-            <div
+            <div data-testid='sign'
               className="flex items-center justify-center bg-Grey-Blue text-white py-4 px-20 rounded-40 mt-4 mb-4 cursor-pointer "
-              onClick={ handleSubmit }
+              onClick={ handleSubmit } 
             >
               { isSignUp ? "Sign Up" : "Sign In"}
             </div>
