@@ -20,14 +20,12 @@ export const SignupComponent = ({ isSignUp }) => {
   const [passwordError, setPasswordError] = useState("");
 
   const linkedinOAuthUrl = LinkedinOAuthUrl;
-
   const [
     signUp,
     {
       isSuccess: isSignUpSuccess,
       isLoading: isSignUpLodaing,
       isError: isSignUpError,
-      data: signUpData,
       error: signUpError,
     },
   ] = useSignUpMutation();
@@ -37,7 +35,6 @@ export const SignupComponent = ({ isSignUp }) => {
       isSuccess: isSignInSuccess,
       isLoading: isSignInLodaing,
       isError: isSignInError,
-      data: signInData,
       error: signInError,
     },
   ] = useSignInMutation();
@@ -47,7 +44,8 @@ export const SignupComponent = ({ isSignUp }) => {
   ] = useGoogleSignInMutation();
 
   useEffect(() => {
-    if (isSignUpSuccess || isSignInSuccess) {
+    console.log('ERRORRORO',signInError)
+    if (isSignUpSuccess || isSignInSuccess) { 
       setName("");
       setEmail("");
       setPassword("");
@@ -62,7 +60,6 @@ export const SignupComponent = ({ isSignUp }) => {
         setPasswordError(signInError?.data?.message);
       toastAlert(signInError?.data?.message, "error");
     }
-   
   }, [isSignUpError, isSignInError, isSignInSuccess, isSignUpSuccess]);
 
   useEffect(() => {
@@ -72,6 +69,7 @@ export const SignupComponent = ({ isSignUp }) => {
   }, [isGoogleError]);
 
   const handleSubmit = async () => {
+    console.log("Submit")
     isSignUp && setNameError("");
     setEmailError("");
     setPasswordError("");
@@ -187,35 +185,68 @@ export const SignupComponent = ({ isSignUp }) => {
           )}
 
           <div className="flex items-center justify-end">
-            <div data-testid='sign'
-              className="flex items-center justify-center bg-Grey-Blue text-white py-4 px-20 rounded-40 mt-4 mb-4 cursor-pointer "
-              onClick={ handleSubmit } 
+            <button data-testid='sign'
+              className={`flex items-center justify-center bg-Grey-Blue text-white py-4 px-20 rounded-40 mt-4 mb-4 ${isSignUpLodaing || isSignInLodaing ? "opacity-50 cursor-not-allowed" : ""}`}
+              onClick={
+                !isSignUpLodaing && !isSignInLodaing && !isGoogleLoading
+                  ? handleSubmit
+                  : null
+              }
+              disabled={isSignUpLodaing || isSignInLodaing || isGoogleLoading}
             >
-              { isSignUp ? "Sign Up" : "Sign In"}
-            </div>
+              {isSignUpLodaing || isSignInLodaing ? (
+                <div className="flex items-center">
+                  <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white border-solid"></div>
+                  <span className="ml-2">Loading...</span>
+                </div>
+              ) : isSignUp ? (
+                "Sign Up"
+              ) : (
+                "Sign In"
+              )}
+            </button>
           </div>
 
           <div className="flex items-center justify-between gap-7">
             <h3 className="text-2xl font-medium ">Or Choose</h3>
-            <div className=" flex items-center justify-center">
-              <div
-                className="flex items-center justify-center border-black border-0.2 px-1 py-4 w-64  rounded-2xl text-xl"
-                onClick={handleGoogleLogin }
+            <div className="flex items-center justify-center">
+              <button
+                className={`flex items-center justify-center border-black border-0.2 px-1 py-4 w-64 rounded-2xl text-xl ${
+                  isSignUpLodaing || isSignInLodaing
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+                onClick={!isGoogleLoading ? handleGoogleLogin : null}
+                disabled={isSignUpLodaing || isSignInLodaing}
               >
                 <p>
-                  { isSignUp
-                      ? "Sign up with Google"
-                      : "Sign in with Google"}
+                  {isGoogleLoading ? (
+                    <div className="flex items-center">
+                      <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white border-solid"></div>
+                      <span className="ml-2">Loading...</span>
+                    </div>
+                  ) : isSignUp ? (
+                    "Sign up with Google"
+                  ) : (
+                    "Sign in with Google"
+                  )}
                 </p>
                 <img className="h-7 ml-2" src={GoogleIcon} alt="" />
-              </div>
+              </button>
             </div>
+
             <div className="flex items-center justify-center">
-              <div className="flex items-center justify-center">
+              <button
+                className={`flex items-center justify-center ${
+                  isGoogleLoading || isSignUpLodaing || isSignInLodaing
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+                disabled={isGoogleLoading || isSignUpLodaing || isSignInLodaing}
+              >
                 <a href={linkedinOAuthUrl}>
-                  <div className=" flex items-center justify-center border-black border-0.2 px-1 py-4 w-64 rounded-2xl text-xl">
+                  <div className="flex items-center justify-center border-black border-0.2 px-1 py-4 w-64 rounded-2xl text-xl">
                     <p>
-                      {" "}
                       {isSignUp
                         ? "Sign up with LinkedIn"
                         : "Sign in with LinkedIn"}
@@ -223,7 +254,7 @@ export const SignupComponent = ({ isSignUp }) => {
                     <img className="h-7 ml-2" src={LinkedinIcon} alt="" />
                   </div>
                 </a>
-              </div>
+              </button>
             </div>
           </div>
 
